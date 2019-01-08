@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>gallery-vuer</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet">
+  <link rel='stylesheet' href='./index.css'>
+  <script src='https://cdn.jsdelivr.net/npm/vue/dist/vue.js'></script>
+  <script src='vue.js'></script>
+</head>
+
+<body>
+  <div class='page-title'>gallery<strong>vue</strong>r</div>
+  <div id='app'>
+
+    <p class='type-button-container-header'>Select the type of media you're looking for</p>
+    <div class='type-button-container'>
+      <button v-on:click='mediaType = "gallery"'>gallery</button>
+      <button v-on:click='mediaType = "exhibition"'>exhibition</button>
+      <button v-on:click='mediaType = "video"'>video</button>
+      <button v-on:click='mediaType = "image"'>image</button>
+    </div>
+
+    <div class='media-container'>
+      <div class='media-record' v-if='mediaType === "gallery"' v-for='record in data'>
+        {{ record.name }}
+      </div>
+
+      <div class='media-record' v-if='mediaType === "exhibition"' v-for='record in data'>
+        {{ record.title }}
+      </div>
+
+      <div class='media-record' v-if='mediaType === "video"' v-for='record in data'>
+        <a :href=record.primaryurl>
+          {{ record.description }}
+        </a>
+      </div>
+
+      <div class='media-record' v-if='mediaType === "image"' v-for='record in data'>
+        <div class="image-inner-container">
+          <img class='media-image' :src=record.baseimageurl alt="">
+        </div>
+        <p class="media-image-text">{{ record.imageid }}</p>
+      </div>
+    </div>
+  </div>
+  <script src='/src/main.js'></script>
+</body>
+
+</html>
