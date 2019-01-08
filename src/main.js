@@ -17,8 +17,6 @@ let app = new Vue({
   created () {
     this.fetchData()
   },
-  updated () {
-  },
   methods: {
     fetchData: function () {
       let API = require('./assets/API');
