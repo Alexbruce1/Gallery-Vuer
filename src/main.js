@@ -1,3 +1,6 @@
+import Vue from 'vue';
+import App from './App'
+
 let app = new Vue({
   el: '#app',
   data: {
@@ -12,23 +15,24 @@ let app = new Vue({
     mediaType: 'gallery'
   },
   created () {
-    let API = require('./assets/API');
-    let url = `https://api.harvardartmuseums.org/${this.mediaType}`;
-
-    fetch(url + API.key)
-      .then(response => response.json())
-      .then(data => {
-        this.data = data.records
-      });
+    this.fetchData()
   },
   updated () {
-    let API = require('./assets/API');
-    let url = `https://api.harvardartmuseums.org/${this.mediaType}`;
-    
-    fetch(url + API.key)
-      .then(response => response.json())
-      .then(data => {
-        this.data = data.records
-      });
+  },
+  methods: {
+    fetchData: function () {
+      let API = require('./assets/API');
+      let url = `https://api.harvardartmuseums.org/${this.mediaType}`;
+
+      fetch(url + API.key)
+        .then(response => response.json())
+        .then(data => {
+          this.data = data.records
+        })
+    },
+    updateMediaType: function (mediaType) {
+      this.mediaType = mediaType
+      this.fetchData()
+    }
   }
 })
