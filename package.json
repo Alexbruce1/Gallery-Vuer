@@ -4,11 +4,15 @@
   "description": "A vue.js project",
   "author": "Alex Bruce <brucealmightyalex@yahoo.com>",
   "private": true,
+  "homepage": 
+  "https://alexbruce1.github.io/Gallery-Vuer",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "lint": "eslint --ext .js,.vue src",
-    "build": "node build/build.js"
+    "build": "node build/build.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "semantic-ui-css": "^2.4.1",
@@ -41,6 +45,7 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
     "friendly-errors-webpack-plugin": "^1.6.1",
+    "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^2.30.1",
     "node-notifier": "^5.1.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
