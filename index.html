@@ -38,9 +38,14 @@
           <p class='record-gallery'>gallery {{ record.galleryid }}</p>
         </div>
       </div>
-
+      
       <div class='media-record' v-if='mediaType === "exhibition"' v-for='record in data'>
-        {{ record.title }}
+        <a :href=record.url >
+          <h3 class='record-name'>
+            {{ record.title }}
+          </h3>
+        </a>
+        <p class='record-last-updated'>last updated {{ record.lastupdate }}</p>
       </div>
 
       <div class='media-record' v-if='mediaType === "video"' v-for='record in data'>
@@ -64,7 +69,6 @@
       <button class="last-page" v-on:click='changePage(1)'>back</button>
       <button class="next-page" v-on:click='changePage(2)'>next</button>
     </div>
-    <p>{{}}</p>
   </div>
   <style>
     * {
