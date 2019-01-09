@@ -31,6 +31,8 @@ let app = new Vue({
           this.data = data.records
           this.info = data.info
         })
+
+      this.searched = true
     },
     updateMediaType: function (mediaType) {
       this.mediaType = mediaType
