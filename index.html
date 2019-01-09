@@ -23,7 +23,7 @@
 
     <form class='search-container' v-on:submit.prevent='submitSearch()'>
       <button type='button' class='search-clear' v-on:click='clearSearch()' value='clear'>clear</button>
-      <input class='search-input' type='text' name='query' v-model='query' placeholder='press enter to filter results' @change='submitSearch'/>
+      <input class='search-input' type='text' name='query' v-model='query' placeholder='search for specific content' @change='submitSearch'/>
       <button type='submit' class='search-button' v-on:click='submitSearch()'>submit</button>
     </form>
 
