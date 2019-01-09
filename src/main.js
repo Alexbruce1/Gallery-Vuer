@@ -6,6 +6,7 @@ let app = new Vue({
   data: {
     info: {},
     data: [],
+    searched: false,
     mediaType: 'gallery',
     currentPage: 1,
     query: ''
@@ -23,13 +24,20 @@ let app = new Vue({
       if (this.query) {
         q = `&q=${this.query}`
       }
-
+      
       fetch(url + API.key + page + q)
         .then(response => response.json())
         .then(data => {
           this.data = data.records
           this.info = data.info
         })
+
+      this.setSearchTrue()
+    },
+    setSearchTrue: function () {
+      window.setTimeout(() => {
+        this.searched = true
+      }, 1000)
     },
     updateMediaType: function (mediaType) {
       this.mediaType = mediaType
@@ -52,6 +60,18 @@ let app = new Vue({
           return;
         }
       }
+    },
+    submitSearch: function (e) {
+      this.query = e.target.value;
+
+      this.fetchData()
+
+      this.query = ''
+    },
+    clearSearch: function () {
+      this.query = ''
+
+      this.fetchData()
     }
   }
 })
