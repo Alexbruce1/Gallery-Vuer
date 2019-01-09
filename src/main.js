@@ -9,7 +9,8 @@ let app = new Vue({
     searched: false,
     mediaType: 'gallery',
     currentPage: 1,
-    query: ''
+    totalPages: 0,
+    query: '',
   },
   created () {
     this.fetchData()
@@ -30,6 +31,7 @@ let app = new Vue({
         .then(data => {
           this.data = data.records
           this.info = data.info
+          this.totalPages = data.info.pages
         })
 
       this.searched = true
@@ -48,7 +50,7 @@ let app = new Vue({
           return;
         }
       } else {
-        if (this.currentPage < this.info.pages + 1) {
+        if (this.currentPage < this.totalPages) {
           this.currentPage++
           this.fetchData()
         } else {
