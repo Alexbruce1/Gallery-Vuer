@@ -43,15 +43,26 @@
         <p class="media-image-text">{{ record.imageid }}</p>
       </div>
     </div>
+    <div class="page-number-container" v-if='info.pages'>
+      <p>page {{ info.page }} of {{ info.pages }}</p>
+    </div>
+    <div class="page-button-container" v-if='info.pages'>
+      <button class="last-page" v-on:click='changePage(1)'>back</button>
+      <button class="next-page" v-on:click='changePage(2)'>next</button>
+    </div>
   </div>
   <style>
     * {
+      color: #33485C;
       font-family: 'Montserrat', sans-serif;
       outline: none;
     }
 
     strong {
+      color: #3FB17F;
       letter-spacing: 0;
+      position: relative;
+      z-index: -1;
     }
 
     .page-title {
@@ -124,6 +135,16 @@
 
     .media-image-text {
       width: 100%;
+    }
+
+    .page-number-container {
+      text-align: center;
+    }
+
+    .page-button-container {
+      margin: 0 auto;
+      text-align: center;
+      width: 10rem;
     }
   </style>
   <script src='/src/main.js'></script>

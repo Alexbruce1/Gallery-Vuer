@@ -4,15 +4,11 @@ import App from './App'
 let app = new Vue({
   el: '#app',
   data: {
-    message: 'Hello, world',
-    items: [
-      'thing1',
-      'thing2',
-      'thing3',
-      'thing4',
-    ],
+    info: {},
     data: [],
-    mediaType: 'gallery'
+    mediaType: 'gallery',
+    currentPage: 1,
+    query: ''
   },
   created () {
     this.fetchData()
@@ -21,16 +17,41 @@ let app = new Vue({
     fetchData: function () {
       let API = require('./assets/API');
       let url = `https://api.harvardartmuseums.org/${this.mediaType}`;
+      let page = `&page=${this.currentPage}`
+      let q = '';
 
-      fetch(url + API.key)
+      if (this.query) {
+        q = `&q=${this.query}`
+      }
+
+      fetch(url + API.key + page + q)
         .then(response => response.json())
         .then(data => {
           this.data = data.records
+          this.info = data.info
         })
     },
     updateMediaType: function (mediaType) {
       this.mediaType = mediaType
+      this.currentPage = 1
       this.fetchData()
+    },
+    changePage: function (direction) {
+      if (direction === 1) {
+        if (this.currentPage > 1) {
+          this.currentPage--
+          this.fetchData()
+        } else {
+          return;
+        }
+      } else {
+        if (this.currentPage < this.info.pages + 1) {
+          this.currentPage++
+          this.fetchData()
+        } else {
+          return;
+        }
+      }
     }
   }
 })
