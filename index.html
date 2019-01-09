@@ -13,7 +13,7 @@
   <div class='page-title'>gallery<strong>vue</strong>r</div>
   <div id='app'>
 
-    <p class='type-button-container-header'>Select the type of media you're looking for</p>
+    <p class='type-button-container-header'>select the type of media you're looking for</p>
     <div class='type-button-container'>
       <button v-on:click='updateMediaType("gallery")'>gallery</button>
       <button v-on:click='updateMediaType("exhibition")'>exhibition</button>
@@ -23,15 +23,20 @@
 
     <form class='search-container' v-on:submit.prevent='submitSearch()'>
       <button type='button' class='search-clear' v-on:click='clearSearch()' value='clear'>clear</button>
-      <!-- <input type='button' class='search-clear' v-on:click='clearSearch()' value='clear'> -->
       <input class='search-input' type='text' name='query' v-model='query' placeholder='press enter to filter results' @change='submitSearch'/>
-      <!-- <input type='submit' class='search-button' > -->
       <button type='submit' class='search-button' v-on:click='submitSearch()'>submit</button>
     </form>
 
     <div class='media-container'>
       <div class='media-record' v-if='mediaType === "gallery"' v-for='record in data'>
-        {{ record.name }}
+        <a :href=record.url>
+          <h3 class='record-name'>{{ record.name }}</h3>
+        </a>
+        <p class='record-last-updated'>last updated {{ record.lastupdate }}</p>
+        <div class='record-second-level'>
+          <p class='record-floor'>floor {{ record.floor }}</p>
+          <p class='record-gallery'>gallery {{ record.galleryid }}</p>
+        </div>
       </div>
 
       <div class='media-record' v-if='mediaType === "exhibition"' v-for='record in data'>
@@ -59,6 +64,7 @@
       <button class="last-page" v-on:click='changePage(1)'>back</button>
       <button class="next-page" v-on:click='changePage(2)'>next</button>
     </div>
+    <p>{{}}</p>
   </div>
   <style>
     * {
@@ -66,6 +72,14 @@
       font-family: 'Montserrat', sans-serif;
       outline: none;
       transition-duration: .3s;
+    }
+
+    body {
+      background: linear-gradient(to left, #fcfcfc, #f7f7f7);
+    }
+
+    a {
+      text-decoration: none;
     }
 
     strong {
@@ -90,10 +104,10 @@
 
     .type-button-container {
       display: inline-flex;
-      justify-content: space-around;
-      margin: 8px auto 1rem;
+      justify-content: space-between;
+      margin: 8px calc(50% - 480px) 1rem;
       text-align: center;
-      width: 100%;
+      width: 960px;
     }
 
     button {
@@ -114,9 +128,13 @@
       border-radius: 4px;
       display: inline-flex;
       justify-content: space-between;
-      margin: 0 calc(50% - 12.5rem);
-      padding: 5px 10px;
+      margin: 0 calc(50% - 13rem);
+      padding: 8px;
       width: 25rem;
+    }
+
+    .search-container:focus-within {
+      background: linear-gradient(to right, #f8f8f8, #f4f4f4);
     }
 
     .search-clear,
@@ -168,6 +186,23 @@
       background: linear-gradient(to right, #fafafa, #f9f9f9);
     }
 
+    .record-name {
+      margin: 0;
+    }
+
+    .record-last-updated {
+      color: #999;
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .record-second-level {
+      display: inline-flex;
+      justify-content: space-between;
+      margin: 0 5%;
+      width: 90%;
+    }
+
     .image-inner-container {
       display: inline-block;
       height: 450px;
@@ -195,7 +230,7 @@
     }
 
     .page-button-container {
-      margin: 0 auto;
+      margin: 0 auto 5rem;
       text-align: center;
       width: 10rem;
     }
