@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import Vue from 'vue'
 import App from './App'
 
 let app = new Vue({
@@ -10,22 +10,21 @@ let app = new Vue({
     mediaType: 'gallery',
     currentPage: 1,
     totalPages: 0,
-    query: '',
+    query: ''
   },
   created () {
     this.fetchData()
   },
   methods: {
     fetchData: function () {
-      let API = require('./assets/API');
-      let url = `https://api.harvardartmuseums.org/${this.mediaType}`;
+      let API = require('./assets/API')
+      let url = `https://api.harvardartmuseums.org/${this.mediaType}`
       let page = `&page=${this.currentPage}`
-      let q = '';
+      let q = ''
 
       if (this.query) {
         q = `&q=${this.query}`
-      }
-      
+      }      
       fetch(url + API.key + page + q)
         .then(response => response.json())
         .then(data => {
@@ -47,19 +46,19 @@ let app = new Vue({
           this.currentPage--
           this.fetchData()
         } else {
-          return;
+          return
         }
       } else {
         if (this.currentPage < this.totalPages) {
           this.currentPage++
           this.fetchData()
         } else {
-          return;
+          return
         }
       }
     },
     submitSearch: function (e) {
-      this.query = e.target.value;
+      this.query = e.target.value
 
       this.fetchData()
 
