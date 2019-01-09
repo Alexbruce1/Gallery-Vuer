@@ -5,7 +5,7 @@ let app = new Vue({
   el: '#app',
   data: {
     info: {},
-    data: [],
+    data: [null],
     searched: false,
     mediaType: 'gallery',
     currentPage: 1,
@@ -31,13 +31,6 @@ let app = new Vue({
           this.data = data.records
           this.info = data.info
         })
-
-      this.setSearchTrue()
-    },
-    setSearchTrue: function () {
-      window.setTimeout(() => {
-        this.searched = true
-      }, 1000)
     },
     updateMediaType: function (mediaType) {
       this.mediaType = mediaType

@@ -51,7 +51,7 @@
         <p class='media-image-text'>{{ record.imageid }}</p>
       </div>
     </div>
-    <h2 class='no-results' v-if='!data.length && searched'>sorry, no results...</h2>
+    <h2 class='no-results' v-if='data.length < 2 && searched'>sorry, no results...</h2>
     <div class='page-number-container' v-if='info.pages'>
       <p>page {{ info.page }} of {{ info.pages }}</p>
     </div>
