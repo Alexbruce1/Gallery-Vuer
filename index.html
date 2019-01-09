@@ -47,11 +47,14 @@
         </a>
         <p class='record-last-updated'>last updated {{ record.lastupdate }}</p>
       </div>
-
+      
       <div class='media-record' v-if='mediaType === "video"' v-for='record in data'>
         <a :href=record.primaryurl>
-          {{ record.description }}
+          <h3 class='record-name'>
+            {{ record.description }}
+          </h3>
         </a>
+        <p class='record-last-updated'>last updated {{ record.lastupdate }}</p>
       </div>
 
       <div class='media-record' v-if='mediaType === "image"' v-for='record in data'>
