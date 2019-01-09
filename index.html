@@ -58,19 +58,23 @@
       </div>
 
       <div class='media-record' v-if='mediaType === "image"' v-for='record in data'>
-        <div class="image-inner-container">
-          <img class='media-image' :src=record.baseimageurl alt="">
+        <div class='image-inner-container'>
+          <a :href=record.baseimageurl >
+            <img class='media-image' :src=record.baseimageurl alt=''>
+          </a>
         </div>
-        <p class='media-image-text'>{{ record.imageid }}</p>
+          <h3 v-if='record.caption' class='image-caption'>{{ record.caption }}</h3>
+          <h3 v-if='!record.caption' class='image-caption'>no caption available</h3>
+          <p class='media-image-text'>image id: {{ record.imageid }}</p>
       </div>
     </div>
     <h2 class='no-results' v-if='data.length < 2 && searched'>sorry, no results...</h2>
     <div class='page-number-container' v-if='info.pages'>
       <p>page {{ info.page }} of {{ info.pages }}</p>
     </div>
-    <div class="page-button-container" v-if='info.pages > 1'>
-      <button class="last-page" v-on:click='changePage(1)'>back</button>
-      <button class="next-page" v-on:click='changePage(2)'>next</button>
+    <div class='page-button-container' v-if='info.pages > 1'>
+      <button class='last-page' v-on:click='changePage(1)'>back</button>
+      <button class='next-page' v-on:click='changePage(2)'>next</button>
     </div>
   </div>
   <style>
@@ -224,7 +228,9 @@
     }
 
     .media-image-text {
-      width: 100%;
+      color: #999;
+      font-size: 15px;
+      margin: 0;
     }
 
     .no-results {
